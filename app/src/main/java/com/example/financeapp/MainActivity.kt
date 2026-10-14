@@ -47,7 +47,9 @@ private fun FinanceAppTheme(content: @Composable () -> Unit) {
 @Composable
 @Suppress("FunctionNaming")
 private fun FinanceAppScreen() {
-    var checkSucceeded by rememberSaveable { mutableStateOf(false) }
+
+    val balance = 25_000
+    val transactionCount = 0
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -65,18 +67,9 @@ private fun FinanceAppScreen() {
             ),
         ) {
             Text(
-                text = stringResource(
-                    if (checkSucceeded) {
-                        R.string.check_success_message
-                    } else {
-                        R.string.test_screen_message
-                    },
-                ),
+                text = "Hello World",
                 style = MaterialTheme.typography.headlineSmall,
             )
-            Button(onClick = { checkSucceeded = true }) {
-                Text(text = stringResource(R.string.check_button))
-            }
         }
     }
 }
