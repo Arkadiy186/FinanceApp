@@ -12,18 +12,23 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.financeapp.MainActivity.Companion.DEFAULT_BALANCE
+
+private const val INCOME_AMOUNT = 500
+private const val EXPENSE_AMOUNT = 250
 
 @Composable
 @Suppress("FunctionNaming")
 internal fun FinanceAppScreen() {
-    val balance = DEFAULT_BALANCE
-    val transactionCount = 0
+    var state by remember { mutableStateOf(MainUiState()) }
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -43,15 +48,33 @@ internal fun FinanceAppScreen() {
             Text(
                 text = stringResource(
                     R.string.balance_summary,
-                    balance,
-                    transactionCount,
+                    state.balance,
+                    state.transactionCount,
                 ),
                 style = MaterialTheme.typography.headlineSmall,
             )
-            Button(onClick = { }) {
+            Button(
+                onClick = {
+                    val transaction = Transaction(
+                        type = TransactionType.Income,
+                        amount = INCOME_AMOUNT
+                    )
+                    val event = MainUiEvent.AddTransaction(transaction)
+                    state = reduce(state, event)
+                },
+            ) {
                 Text(text = stringResource(R.string.add_income_button))
             }
-            Button(onClick = { }) {
+            Button(
+                onClick = {
+                    val transaction = Transaction(
+                        type = TransactionType.Expense,
+                        amount = EXPENSE_AMOUNT
+                    )
+                    val event = MainUiEvent.AddTransaction(transaction)
+                    state = reduce(state, event)
+                },
+            ) {
                 Text(text = stringResource(R.string.add_expense_button))
             }
         }
