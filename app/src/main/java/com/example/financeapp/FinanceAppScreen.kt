@@ -57,7 +57,7 @@ internal fun FinanceAppScreen() {
                 onClick = {
                     val transaction = Transaction(
                         type = TransactionType.Income,
-                        amount = INCOME_AMOUNT
+                        amount = INCOME_AMOUNT,
                     )
                     val event = MainUiEvent.AddTransaction(transaction)
                     state = reduce(state, event)
@@ -69,7 +69,7 @@ internal fun FinanceAppScreen() {
                 onClick = {
                     val transaction = Transaction(
                         type = TransactionType.Expense,
-                        amount = EXPENSE_AMOUNT
+                        amount = EXPENSE_AMOUNT,
                     )
                     val event = MainUiEvent.AddTransaction(transaction)
                     state = reduce(state, event)
