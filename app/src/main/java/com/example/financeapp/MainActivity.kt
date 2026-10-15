@@ -11,12 +11,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.financeapp.MainActivity.Companion.DEFAULT_BALANCE
@@ -62,12 +64,22 @@ private fun FinanceAppScreen() {
             verticalArrangement = Arrangement.spacedBy(
                 space = 24.dp,
                 alignment = Alignment.CenterVertically,
-            ),
+            )
         ) {
             Text(
-                text = "Hello World",
+                text = stringResource(
+                    R.string.balance_summary,
+                    balance,
+                    transactionCount
+                ),
                 style = MaterialTheme.typography.headlineSmall,
             )
+            Button(onClick = { }) {
+                Text(text = stringResource(R.string.add_income_button))
+            }
+            Button(onClick = { }) {
+                Text(text = stringResource(R.string.add_expense_button))
+            }
         }
     }
 }
