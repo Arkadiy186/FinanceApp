@@ -41,54 +41,6 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 @Suppress("FunctionNaming")
-private fun FinanceAppTheme(content: @Composable () -> Unit) {
+internal fun FinanceAppTheme(content: @Composable () -> Unit) {
     MaterialTheme(content = content)
-}
-
-@Composable
-@Suppress("FunctionNaming")
-private fun FinanceAppScreen() {
-    val balance = DEFAULT_BALANCE
-    val transactionCount = 0
-
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background,
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .windowInsetsPadding(WindowInsets.safeDrawing)
-                .padding(horizontal = 60.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(
-                space = 24.dp,
-                alignment = Alignment.CenterVertically,
-            ),
-        ) {
-            Text(
-                text = stringResource(
-                    R.string.balance_summary,
-                    balance,
-                    transactionCount,
-                ),
-                style = MaterialTheme.typography.headlineSmall,
-            )
-            Button(onClick = { }) {
-                Text(text = stringResource(R.string.add_income_button))
-            }
-            Button(onClick = { }) {
-                Text(text = stringResource(R.string.add_expense_button))
-            }
-        }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-@Suppress("FunctionNaming", "UnusedPrivateFunction")
-private fun FinanceAppScreenPreview() {
-    FinanceAppTheme {
-        FinanceAppScreen()
-    }
 }
