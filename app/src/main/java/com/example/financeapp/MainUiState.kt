@@ -21,14 +21,11 @@ internal sealed interface MainUiEvent {
     data class AddTransaction(val transaction: Transaction) : MainUiEvent
 }
 
-internal fun reduce(state: MainUiState, event: MainUiEvent): MainUiState =
-    when (event) {
+internal fun reduce(state: MainUiState, event: MainUiEvent): MainUiState = when (event) {
     is MainUiEvent.AddTransaction -> {
         val transaction = event.transaction
-
         require(transaction.amount > 0) { "Amount must be positive" }
 
-        // Вычисляем изменение баланса: + для дохода, - для расхода
         val delta = when (transaction.type) {
             TransactionType.Income -> transaction.amount
             TransactionType.Expense -> -transaction.amount
