@@ -63,16 +63,16 @@ private fun FinanceAppScreen() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(
                 space = 24.dp,
-                alignment = Alignment.CenterVertically
-            )
+                alignment = Alignment.CenterVertically,
+            ),
         ) {
             Text(
                 text = stringResource(
                     R.string.balance_summary,
                     balance,
-                    transactionCount
+                    transactionCount,
                 ),
-                style = MaterialTheme.typography.headlineSmall
+                style = MaterialTheme.typography.headlineSmall,
             )
             Button(onClick = { }) {
                 Text(text = stringResource(R.string.add_income_button))
