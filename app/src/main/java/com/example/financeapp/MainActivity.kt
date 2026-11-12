@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import com.example.financeapp.legacy.FinanceAppScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,10 +17,6 @@ class MainActivity : ComponentActivity() {
                 FinanceAppScreen()
             }
         }
-    }
-
-    companion object {
-        const val DEFAULT_BALANCE = 25_000
     }
 }
 

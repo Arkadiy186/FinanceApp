@@ -1,4 +1,4 @@
-package com.example.financeapp
+package com.example.financeapp.legacy
 
 private const val DEFAULT_BALANCE = 25_000
 
