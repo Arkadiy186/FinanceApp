@@ -13,13 +13,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             FinanceAppTheme {
-                FinanceAppScreen()
+                TransactionScreen()
             }
         }
-    }
-
-    companion object {
-        const val DEFAULT_BALANCE = 25_000
     }
 }
 
