@@ -21,11 +21,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.compose.material3.TextButton
 
 @Composable
 @Suppress("FunctionNaming")
-internal fun TransactionScreen(viewModel: TransactionViewModel = viewModel()) {
+internal fun TransactionScreen(viewModel: TransactionViewModel, showBalance: Boolean, onOpenSettings: () -> Unit) {
     val state = viewModel.uiState
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(
@@ -34,7 +34,7 @@ internal fun TransactionScreen(viewModel: TransactionViewModel = viewModel()) {
                 .verticalScroll(rememberScrollState())
                 .padding(24.dp),
         ) {
-            TransactionHeader(state)
+            TransactionHeader(state, showBalance, onOpenSettings)
             TransactionForm(state, viewModel)
             TransactionHistory(state)
         }
@@ -43,15 +43,16 @@ internal fun TransactionScreen(viewModel: TransactionViewModel = viewModel()) {
 
 @Composable
 @Suppress("FunctionNaming")
-private fun TransactionHeader(state: MainUiState) {
+private fun TransactionHeader(state: MainUiState, showBalance: Boolean, onOpenSettings: () -> Unit) {
     Text(stringResource(R.string.transaction_title))
-    Text(
-        stringResource(
-            R.string.balance_summary,
-            state.balance,
-            state.transactionCount,
-        ),
-    )
+    TextButton(onClick = onOpenSettings) {
+        Text(stringResource(R.string.settings_title))
+    }
+    if (showBalance) {
+        Text(stringResource(R.string.balance_summary, state.balance, state.transactionCount))
+    } else {
+        Text(stringResource(R.string.transaction_count, state.transactionCount))
+    }
     if (state.isLoading) {
         Text(stringResource(R.string.transaction_loading))
     }
