@@ -52,6 +52,9 @@ private fun TransactionHeader(state: MainUiState) {
             state.transactionCount,
         ),
     )
+    if (state.isLoading) {
+        Text(stringResource(R.string.transaction_loading))
+    }
 }
 
 @Composable
@@ -61,28 +64,33 @@ private fun TransactionForm(state: MainUiState, viewModel: TransactionViewModel)
         value = state.description,
         onValueChange = { viewModel.onEvent(MainUiEvent.DescriptionChanged(it)) },
         label = { Text(stringResource(R.string.transaction_description)) },
+        enabled = state.isDatabaseReady && !state.isSaving,
     )
     OutlinedTextField(
         value = state.amount,
         onValueChange = { viewModel.onEvent(MainUiEvent.AmountChanged(it)) },
         label = { Text(stringResource(R.string.transaction_amount)) },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+        enabled = state.isDatabaseReady && !state.isSaving,
     )
     Row {
         FilterChip(
             selected = state.type == TransactionType.EXPENSE,
             onClick = { viewModel.onEvent(MainUiEvent.TypeChanged(TransactionType.EXPENSE)) },
             label = { Text(stringResource(R.string.transaction_expense)) },
+            enabled = state.isDatabaseReady && !state.isSaving,
         )
         FilterChip(
             selected = state.type == TransactionType.INCOME,
             onClick = { viewModel.onEvent(MainUiEvent.TypeChanged(TransactionType.INCOME)) },
             label = { Text(stringResource(R.string.transaction_income)) },
+            enabled = state.isDatabaseReady && !state.isSaving,
         )
         state.error?.let { error ->
             val textId = when (error) {
                 TransactionError.INVALID_INPUT -> R.string.transaction_invalid_input
                 TransactionError.AMOUNT_TOO_LARGE -> R.string.transaction_amount_too_large
+                TransactionError.DATABASE_ERROR -> R.string.transaction_database_error
             }
             Text(
                 stringResource(textId),

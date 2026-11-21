@@ -5,6 +5,7 @@ enum class TransactionType { INCOME, EXPENSE }
 enum class TransactionError {
     INVALID_INPUT,
     AMOUNT_TOO_LARGE,
+    DATABASE_ERROR,
 }
 
 data class Transaction(
@@ -21,6 +22,9 @@ data class MainUiState(
     val transactionCount: Int = 0,
     val transactions: List<Transaction> = emptyList(),
     val error: TransactionError? = null,
+    val isLoading: Boolean = true,
+    val isSaving: Boolean = false,
+    val isDatabaseReady: Boolean = false,
 )
 
 internal sealed interface MainUiEvent {
